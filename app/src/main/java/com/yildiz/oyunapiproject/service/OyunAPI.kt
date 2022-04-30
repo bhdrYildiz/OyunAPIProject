@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface OyunAPI {
     companion object {
-        const val OYUN = "machineTypeList/machine/public/index.php/"
+        const val OYUN = "machineTypeList"
     }
     @GET(OYUN)
     fun getData(): Single<OyunResponse>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yildiz.oyunapiproject.R
 import com.yildiz.oyunapiproject.adapter.RecyclerViewAdapter
+import com.yildiz.oyunapiproject.databinding.ActivityMainBinding
 import com.yildiz.oyunapiproject.model.OyunResponse
 import com.yildiz.oyunapiproject.service.OyunAPI
 import com.yildiz.oyunapiproject.service.OyunAPIService
@@ -24,20 +25,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private var oyunApıService = OyunAPIService()
     private val recyclerviewAdapter = RecyclerViewAdapter()
+    private lateinit var binding: ActivityMainBinding
     private var oyunNameList: ArrayList<String?> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         oyunApıService.getOyun()
             .subscribeOn(Schedulers.newThread())
-            .subscribeWith(object : DisposableSingleObserver<OyunResponse>(){
+            .subscribeWith(object : DisposableSingleObserver<OyunResponse>() {
                 @RequiresApi(Build.VERSION_CODES.O)
-                override fun onSuccess(t: OyunResponse) {
+                override fun onSuccess(s: OyunResponse) {
                     runOnUiThread {
-                        recyclerviewAdapter.setOyunData(t)
-                        t.forEach {
+                        recyclerviewAdapter.setOyunData(s)
+                        s.forEach {
                             it.let {
                                 oyunNameList.add(it.machineType)
                             }
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 override fun onError(e: Throwable) {
-                   e.printStackTrace()
+                    e.printStackTrace()
                 }
             })
 

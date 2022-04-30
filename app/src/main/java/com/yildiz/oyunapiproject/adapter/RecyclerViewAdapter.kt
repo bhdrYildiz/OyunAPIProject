@@ -33,5 +33,4 @@ class RecyclerViewAdapter() : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder
         notifyDataSetChanged()
     }
 
-
 }

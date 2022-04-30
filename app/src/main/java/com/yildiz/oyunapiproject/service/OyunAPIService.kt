@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class OyunAPIService {
-    private val BASE_URL = "https://oyunpuanla.com/"
+    private val BASE_URL = "https://oyunpuanla.com/machine/public/index.php/"
 
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
