@@ -41,9 +41,7 @@ class MainActivity : AppCompatActivity() {
                     runOnUiThread {
                         recyclerviewAdapter.setOyunData(s)
                         s.forEach {
-                            it.let {
                                 oyunNameList.add(it.machineType)
-                            }
                         }
                     }
                 }
